@@ -1,0 +1,20 @@
+Build an api
+Build different sorts of interfaces that interact with it
+	Build a web app crud
+	Build a phone app crud
+	Build a desktop app crud
+	Build a game
+Deploy both api and db in docker containers that talk to eachother
+Choose frameworks, languages, tools
+
+visual studio 2022
+c#
+.net api
+
+it doesnt have to be perfect
+you just have to start it
+then it will get better
+
+can sign in and out
+can register from
+can modify account information

@@ -1,0 +1,6 @@
+CREATE TABLE accounts (
+	userId INT NOT NULL UNIQUE,
+	username NVARCHAR(50) NOT NULL,
+	email NVARCHAR(100) NOT NULL,
+	PRIMARY KEY (userId)
+);
