@@ -1,5 +1,0 @@
-CREATE TABLE password (
-	userId INT NOT NULL UNIQUE,
-	password NVARCHAR(50) NOT NULL,
-	PRIMARY KEY (userId)
-);

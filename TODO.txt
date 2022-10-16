@@ -1,20 +1,17 @@
-Build an api
-Build different sorts of interfaces that interact with it
-	Build a web app crud
-	Build a phone app crud
-	Build a desktop app crud
-	Build a game
 Deploy both api and db in docker containers that talk to eachother
 Choose frameworks, languages, tools
 
 visual studio 2022
 c#
 .net api
+ef
+docker
+ms sql
+ssms
 
-it doesnt have to be perfect
-you just have to start it
-then it will get better
+build a docker to build a ms sql db and open ports to talk to the api
 
-can sign in and out
-can register from
-can modify account information
+create a pipeline cmd
+build->test->deploy
+
+make this ci/cd a single click

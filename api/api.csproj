@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\data-access\data-access.csproj" />
     <ProjectReference Include="..\Domain\domain.csproj" />
   </ItemGroup>
 

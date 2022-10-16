@@ -1,16 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using domain;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
+//using domain;
+using data_access.MSSql;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace api.Controllers
@@ -19,21 +9,27 @@ namespace api.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        public AccountController()
+        private readonly ILogger<AccountController> _logger;
+        private MSSql _db;
+        public AccountController(ILogger<AccountController> logger)
         {
-            string connectionString;
-            SqlConnection cnn;
-            connectionString = @"Data Source=WIN-50GP30FGO75;Initial Catalog=Demodb;User ID=sa;Password=demol23";
-            cnn = new SqlConnection(connectionString);
-            cnn.Open();
-            cnn.Close();
+            _logger = logger;
+            _db = new MSSql();
         }
 
         // GET: api/<AccountController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public string Get()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                return _db.selectAccounts();
+            }
+            catch (Exception e)
+            {
+                //throw new Exception("couldn't connect to database");
+                return "exception";
+            }
         }
 
         // GET api/<AccountController>/5
