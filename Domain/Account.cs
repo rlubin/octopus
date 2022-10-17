@@ -4,15 +4,15 @@
     {
         public Account(int userId, string username, string email, string password)
         {
-            this.userId = userId;
-            this.username = username;
-            this.email = email;
-            this.password = password;
+            this.UserId = userId;
+            this.Username = username;
+            this.Email = email;
+            this.Password = password;
         }
 
-        public int userId { get; set; }
-        public string username { get; set; }
-        public string email{ get; set; }
-        public string password { get; set; }
+        public int UserId { get; set; }
+        public string Username { get; set; }
+        public string Email{ get; set; }
+        public string Password { get; set; }
     }
 }

@@ -1,20 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 //using domain;
-using data_access.MSSql;
+using data_access.Data;
+using data_access.Models;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class AccountController : ControllerBase
     {
         private readonly ILogger<AccountController> _logger;
-        private MSSql _db;
+        OctopusContext _context;
         public AccountController(ILogger<AccountController> logger)
         {
             _logger = logger;
-            _db = new MSSql();
+            _context = new OctopusContext();
         }
 
         // GET: api/<AccountController>
@@ -23,12 +25,24 @@ namespace api.Controllers
         {
             try
             {
-                return _db.selectAccounts();
+                var accounts = _context.Accounts;
+                string str = "";
+
+                foreach (Account a in accounts)
+                {
+                    Console.WriteLine(a.UserId);
+                    Console.WriteLine(a.Email);
+                    Console.WriteLine(a.Username);
+                    Console.WriteLine(a.Password);
+                    str += String.Format("{0} {1} {2} {3}\n", a.UserId, a.Email, a.Username, a.Password);
+                }
+
+                return str;
             }
             catch (Exception e)
             {
                 //throw new Exception("couldn't connect to database");
-                return "exception";
+                return "error";
             }
         }
 
