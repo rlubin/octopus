@@ -21,29 +21,21 @@ namespace api.Controllers
 
         // GET: api/<AccountController>
         [HttpGet]
-        public string Get()
+        public IEnumerable<Account> Get()
         {
-            try
-            {
-                var accounts = _context.Accounts;
-                string str = "";
+            var accounts = _context.Accounts;
 
-                foreach (Account a in accounts)
-                {
-                    Console.WriteLine(a.UserId);
-                    Console.WriteLine(a.Email);
-                    Console.WriteLine(a.Username);
-                    Console.WriteLine(a.Password);
-                    str += String.Format("{0} {1} {2} {3}\n", a.UserId, a.Email, a.Username, a.Password);
-                }
-
-                return str;
-            }
-            catch (Exception e)
+            foreach (Account a in accounts)
             {
-                //throw new Exception("couldn't connect to database");
-                return "error";
+                Console.WriteLine(a.UserId);
+                Console.WriteLine(a.Email);
+                Console.WriteLine(a.Username);
+                Console.WriteLine(a.Password);
             }
+
+            return accounts.ToList();
+            //return Content(accounts.FirstOrDefault().UserId + accounts.FirstOrDefault().Email + accounts.FirstOrDefault().Username + accounts.FirstOrDefault().Password);
+            
         }
 
         // GET api/<AccountController>/5
