@@ -1,7 +1,7 @@
 ﻿using api.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace api.Data
+namespace api.DatabaseContexts
 {
     public class OctopusContext : DbContext
     {
