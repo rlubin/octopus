@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-//using domain;
 using data_access.Data;
 using data_access.Models;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -23,44 +22,43 @@ namespace api.Controllers
         [HttpGet]
         public IEnumerable<Account> Get()
         {
-            var accounts = _context.Accounts;
-
-            foreach (Account a in accounts)
-            {
-                Console.WriteLine(a.UserId);
-                Console.WriteLine(a.Email);
-                Console.WriteLine(a.Username);
-                Console.WriteLine(a.Password);
-            }
-
-            return accounts.ToList();
-            //return Content(accounts.FirstOrDefault().UserId + accounts.FirstOrDefault().Email + accounts.FirstOrDefault().Username + accounts.FirstOrDefault().Password);
-            
+            return _context.Accounts.ToList();
         }
 
         // GET api/<AccountController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IEnumerable<Account> Get(int id)
         {
-            return "value";
+            return _context.Accounts.Where(a => a.UserId == id).ToList();
         }
 
         // POST api/<AccountController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Account account)
         {
+            _context.Accounts.Add(account);
+            _context.SaveChanges();
         }
 
         // PUT api/<AccountController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Account account)
         {
+            Account? a = _context.Accounts.Where(a => a.UserId == id).FirstOrDefault();
+            a.Username = account.Username;
+            a.Email = account.Email;
+            a.Password = account.Password;
+            _context.Accounts.Update(a);
+            _context.SaveChanges();
         }
 
         // DELETE api/<AccountController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            Account? a = _context.Accounts.Where(a => a.UserId == id).FirstOrDefault();
+            _context.Accounts.Remove(a);
+            _context.SaveChanges();
         }
     }
 }

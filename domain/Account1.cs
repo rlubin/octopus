@@ -1,8 +1,8 @@
 ﻿namespace domain
 {
-    public class Account
+    public class Account1
     {
-        public Account(int userId, string username, string email, string password)
+        public Account1(int userId, string username, string email, string password)
         {
             this.UserId = userId;
             this.Username = username;
