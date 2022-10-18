@@ -1,10 +1,10 @@
-﻿using data_access.Models;
+﻿using api.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace data_access.Migrations
+namespace api.Migrations
 {
     public partial class InitialCreate : Migration
     {

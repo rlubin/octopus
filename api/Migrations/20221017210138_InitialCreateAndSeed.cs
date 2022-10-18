@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace data_access.Migrations
+namespace api.Migrations
 {
     public partial class InitialCreateAndSeed : Migration
     {

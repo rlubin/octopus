@@ -1,15 +1,14 @@
 # Octopus
 ## Description
-Single application where you can create an account and can perform all CRUD operations on it from multiple devices.
+API where you can create an account and can perform all CRUD operations on it from multiple devices.
+Eventually an API for friends that require data analysis.
 
 ## Technologies
  - .NET API
  - Docker
  - Swagger
  - MS SQL
+ - Entity Framework
 
 ## Vision
  - Build an api
- - Build different sorts of interfaces that interact with it
- - Build a web app crud
- - Build a desktop app crud / game

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 
-namespace data_access.Models
+namespace api.Models
 {
     public class Account
     {

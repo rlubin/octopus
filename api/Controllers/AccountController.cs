@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using data_access.Data;
-using data_access.Models;
+using api.Data;
+using api.Models;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace api.Controllers
@@ -11,7 +11,7 @@ namespace api.Controllers
     public class AccountController : ControllerBase
     {
         private readonly ILogger<AccountController> _logger;
-        OctopusContext _context;
+        private OctopusContext _context;
         public AccountController(ILogger<AccountController> logger)
         {
             _logger = logger;

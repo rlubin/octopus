@@ -1,7 +1,7 @@
-﻿using data_access.Models;
+﻿using api.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace data_access.Data
+namespace api.Data
 {
     public class OctopusContext : DbContext
     {

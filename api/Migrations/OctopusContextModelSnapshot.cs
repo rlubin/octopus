@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using data_access.Data;
+using api.Data;
 
 #nullable disable
 
-namespace data_access.Migrations
+namespace api.Migrations
 {
     [DbContext(typeof(OctopusContext))]
     partial class OctopusContextModelSnapshot : ModelSnapshot
@@ -21,7 +21,7 @@ namespace data_access.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("data_access.Models.Account", b =>
+            modelBuilder.Entity("api.Models.Account", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
