@@ -15,3 +15,5 @@ create a pipeline cmd
 build->test->deploy
 
 make this ci/cd a single click
+
+build a login controller
