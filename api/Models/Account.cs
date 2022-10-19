@@ -16,6 +16,5 @@ namespace api.Models
 
         [Required]
         public string? Password { get; set; }
-        public string? ApiKey { get; set; }
     }
 }

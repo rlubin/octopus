@@ -12,6 +12,7 @@ namespace api.Controllers
     {
         private readonly ILogger<AccountController> _logger;
         private OctopusContext _context;
+
         public AccountController(ILogger<AccountController> logger)
         {
             _logger = logger;
@@ -79,7 +80,7 @@ namespace api.Controllers
                 a.Username = account.Username;
                 a.Email = account.Email;
                 a.Password = account.Password;
-                a.ApiKey = account.ApiKey;
+                //a.ApiKey = account.ApiKey;
                 _context.Accounts.Update(a);
                 _context.SaveChanges();
                 return $"userId == {a.UserId} updated in db";

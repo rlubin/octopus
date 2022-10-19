@@ -4,6 +4,7 @@ using api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace api.Middleware
@@ -24,40 +25,31 @@ namespace api.Middleware
 
         public async Task InvokeAsync(HttpContext context)
         {
-            _logger.LogInformation("ApiKey check");
-            //if (!context.Request.Headers.TryGetValue(APIKEYNAME, out var extractedApiKey))
             if (!context.Request.Headers.TryGetValue(APIKEYNAME, out var extractedApiKey))
             {
                 context.Response.StatusCode = 401;
+                _context.ApiCalls.Add(new ApiCall { Timestamp = DateTime.Now, Endpoint = context.Request.Method + context.Request.Path, ApiKey = "0", UserId = "0", IpAddress = context.Connection.RemoteIpAddress.ToString() });
+                _context.SaveChanges();
                 _logger.LogInformation("Api Key was not provided");
                 await context.Response.WriteAsync("Api Key was not provided");
                 return;
             }
 
-            //var appSettings = context.RequestServices.GetRequiredService<IConfiguration>();
-            //var apiKey = appSettings.GetValue<string>(APIKEYNAME);
-
-            //if (!apiKey.Equals(extractedApiKey))
-            //{
-            //    context.Response.StatusCode = 401;
-            //    _logger.LogInformation("Unauthorized client");
-            //    await context.Response.WriteAsync("Unauthorized client");
-            //    return;
-            //}
-
             string exApiKey = extractedApiKey.ToString();
-            Account? a = _context.Accounts.Where(a => a.ApiKey == exApiKey).First();
-            _logger.LogError(a.ApiKey + "-" + exApiKey);
+            ApiKey? a = _context.ApiKeys.Where(a => a.Key == exApiKey).First();
 
             if (a == null)
             {
                 context.Response.StatusCode = 401;
+                _context.ApiCalls.Add(new ApiCall { Timestamp = DateTime.Now, Endpoint = context.Request.Method + context.Request.Path, ApiKey = exApiKey, UserId = a.UserId.ToString(), IpAddress = context.Connection.RemoteIpAddress.ToString() });
+                _context.SaveChanges();
                 _logger.LogInformation("Unauthorized client");
                 await context.Response.WriteAsync("Unauthorized client");
                 return;
             }
 
-            _logger.LogInformation("ApiKey check successful");
+            _context.ApiCalls.Add(new ApiCall { Timestamp = DateTime.Now, Endpoint = context.Request.Method + context.Request.Path, ApiKey = exApiKey, UserId = a.UserId.ToString(), IpAddress = context.Connection.RemoteIpAddress.ToString() });
+            _context.SaveChanges();
             await _next(context);
         }
     }
