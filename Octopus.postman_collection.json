@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "10033bd3-e509-42a6-8a40-12dfb11e0223",
+		"name": "Octopus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19318835"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Read All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}{{accounts}}",
+							"host": [
+								"{{host}}{{accounts}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "https://localhost:7251/api/Account/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7251",
+							"path": [
+								"api",
+								"Account",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"New User1\",\r\n    \"email\": \"newuser1@email.com\",\r\n    \"password\": \"newuser1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7251/api/Account",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7251",
+							"path": [
+								"api",
+								"Account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"updateduser\",\r\n    \"email\": \"updateduser@email.com\",\r\n    \"password\": \"updateduser\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7251/api/Account/5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7251",
+							"path": [
+								"api",
+								"Account",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7251/api/Account/5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7251",
+							"path": [
+								"api",
+								"Account",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ApiKey",
+			"item": [
+				{
+					"name": "Read All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7251/api/ApiKey",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7251",
+							"path": [
+								"api",
+								"ApiKey"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7251/api/ApiKey/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7251",
+							"path": [
+								"api",
+								"ApiKey",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7251/api/ApiKey/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7251",
+							"path": [
+								"api",
+								"ApiKey",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "https://localhost:7251",
+			"type": "string"
+		},
+		{
+			"key": "accounts",
+			"value": "/api/Account",
+			"type": "string"
+		},
+		{
+			"key": "apikeys",
+			"value": "/api/ApiKey",
+			"type": "string"
+		}
+	]
+}
