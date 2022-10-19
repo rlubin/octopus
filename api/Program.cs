@@ -43,6 +43,6 @@ app.MapControllers();
 
 app.UseCors(AllowAll);
 
-app.UseMiddleware<ApiKeyMiddleware>();
+//app.UseMiddleware<ApiKeyMiddleware>();
 
 app.Run();

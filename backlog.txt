@@ -1,0 +1,35 @@
+create different middleware for valid session check
+session cookie login/logout
+
+create different middleware for api token in url
+add apikey to url host:123/api=asldkasld for data processing endpoints
+
+find a way to automate return messages from api endpoints
+
+find a way to automate exception handling
+
+find a way to build a testing code easily (automated)
+-add unit testing to everything
+
+ability to login/logout
+-make api-key only required when hitting specific endpoints, not account management
+-need to add cookie for login sessions
+
+add postman tests to git
+-find way to give all requests a apikey
+-reassign all the urls to variables
+
+create a pipeline build->test->deploy
+-make this ci/cd turn key (single command/click)
+
+build a login controller
+-session key in cookie
+
+look into DTOs
+-better way to pass data?
+
+deploy in docker
+-get both api and db running in same docker
+-get db init and seeded
+
+build a web app (mobile and pc friendly)

@@ -1,14 +1,13 @@
 # Octopus
 ## Description
-API where you can create an account and can perform all CRUD operations on it from multiple devices.
-Eventually an API for friends that require data analysis.
+Web API that has account management and apikeys to authorize access to the various future endpoints.
 
-## Technologies
- - .NET API
- - Docker
+## Tools/Technologies/Frameworks/Languages
+ - Visual Studio 2022
+ - SSMS
+ - Postman
+ - .NET API C#
  - Swagger
+ - Entity Framework (code first)
+ - Docker
  - MS SQL
- - Entity Framework
-
-## Vision
- - Build an api

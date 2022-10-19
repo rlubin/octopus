@@ -101,10 +101,11 @@ namespace api.Controllers
             try
             {
                 // update account active to false
-                a.Active = false;
-                _context.Accounts.Update(a);
-                //_context.Accounts.Remove(a);
-                //_context.SaveChanges();
+                if (a != null)
+                {
+                    a.Active = false;
+                    _context.Accounts.Update(a);
+                }
 
                 // deactiving all api keys associated to account
                 List<ApiKey> dact = _context.ApiKeys.Where(a => a.UserId == userId).ToList();
