@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using api.DatabaseContexts;
+using api.Contexts;
 
 #nullable disable
 
@@ -29,6 +29,9 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
+                    b.Property<string>("ApiKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -49,6 +52,7 @@ namespace api.Migrations
                         new
                         {
                             UserId = 1,
+                            ApiKey = "tk@Gn3DxW5ljMocBWSgpEZSyxDft.0BwFecZLlScVKa&XlyrTX2Z1QeSTyY!L7MH",
                             Email = "admin@email.com",
                             Password = "admin",
                             Username = "admin"
@@ -56,6 +60,7 @@ namespace api.Migrations
                         new
                         {
                             UserId = 2,
+                            ApiKey = "tk@Gn3DxW5ljMocBWSgpEZSyxDft.0BwFecZLlScVKa&XlyrTX2Z1QeSTyY!L7MH",
                             Email = "user1@email.com",
                             Password = "user1",
                             Username = "user1"

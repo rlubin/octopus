@@ -1,7 +1,7 @@
 ﻿using api.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace api.DatabaseContexts
+namespace api.Contexts
 {
     public class OctopusContext : DbContext
     {
@@ -15,8 +15,8 @@ namespace api.DatabaseContexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>().HasData(new Account[] {
-                new Account{UserId=1, Username="admin", Email="admin@email.com", Password="admin"},
-                new Account{UserId=2, Username="user1", Email="user1@email.com", Password="user1"},
+                new Account{UserId=1, Username="admin", Email="admin@email.com", Password="admin", ApiKey="1"},
+                new Account{UserId=2, Username="user1", Email="user1@email.com", Password="user1", ApiKey="2"},
             });
         }
     }

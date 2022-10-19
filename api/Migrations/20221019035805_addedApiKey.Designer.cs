@@ -11,8 +11,8 @@ using api.Contexts;
 namespace api.Migrations
 {
     [DbContext(typeof(OctopusContext))]
-    [Migration("20221017204413_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221019035805_addedApiKey")]
+    partial class addedApiKey
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,9 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
+                    b.Property<string>("ApiKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -46,6 +49,24 @@ namespace api.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Accounts");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            ApiKey = "tk@Gn3DxW5ljMocBWSgpEZSyxDft.0BwFecZLlScVKa&XlyrTX2Z1QeSTyY!L7MH",
+                            Email = "admin@email.com",
+                            Password = "admin",
+                            Username = "admin"
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            ApiKey = "tk@Gn3DxW5ljMocBWSgpEZSyxDft.0BwFecZLlScVKa&XlyrTX2Z1QeSTyY!L7MH",
+                            Email = "user1@email.com",
+                            Password = "user1",
+                            Username = "user1"
+                        });
                 });
 #pragma warning restore 612, 618
         }

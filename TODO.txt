@@ -1,19 +1,23 @@
-Deploy both api and db in docker containers that talk to eachother
-Choose frameworks, languages, tools
+unit test everything
+
+endpoint tests (postman)
+
+create a pipeline build->test->deploy
+
+build a login controller
+
+look into DTOs
+
+deploy db in docker with db setup and seed
+
+
+
 
 visual studio 2022
 c#
 .net api
-ef
+ef (codefirst)
 docker
 ms sql
 ssms
-
-build a docker to build a ms sql db and open ports to talk to the api
-
-create a pipeline cmd
-build->test->deploy
-
-make this ci/cd a single click
-
-build a login controller
+jwt

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using api.DatabaseContexts;
+using api.Contexts;
 using api.Models;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -79,6 +79,7 @@ namespace api.Controllers
                 a.Username = account.Username;
                 a.Email = account.Email;
                 a.Password = account.Password;
+                a.ApiKey = account.ApiKey;
                 _context.Accounts.Update(a);
                 _context.SaveChanges();
                 return $"userId == {a.UserId} updated in db";

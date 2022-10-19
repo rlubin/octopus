@@ -1,4 +1,8 @@
+using api.Middleware;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System.Data.SqlClient;
+using System.Text;
 
 var AllowAll = "_AllowAll";
 
@@ -38,5 +42,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseCors(AllowAll);
+
+app.UseMiddleware<ApiKeyMiddleware>();
 
 app.Run();
