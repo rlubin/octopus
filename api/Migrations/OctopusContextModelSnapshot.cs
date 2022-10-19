@@ -30,6 +30,12 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -50,6 +56,8 @@ namespace api.Migrations
                         new
                         {
                             UserId = 1,
+                            Active = true,
+                            CreatedOn = new DateTime(2022, 10, 19, 17, 30, 25, 589, DateTimeKind.Local).AddTicks(2467),
                             Email = "admin@email.com",
                             Password = "admin",
                             Username = "admin"
@@ -57,9 +65,20 @@ namespace api.Migrations
                         new
                         {
                             UserId = 2,
+                            Active = true,
+                            CreatedOn = new DateTime(2022, 10, 19, 17, 30, 25, 589, DateTimeKind.Local).AddTicks(2503),
                             Email = "user1@email.com",
                             Password = "user1",
                             Username = "user1"
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            Active = false,
+                            CreatedOn = new DateTime(2022, 10, 19, 17, 30, 25, 589, DateTimeKind.Local).AddTicks(2505),
+                            Email = "user1@email.com",
+                            Password = "user2",
+                            Username = "user2"
                         });
                 });
 
@@ -71,9 +90,8 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ApiCallId"), 1L, 1);
 
-                    b.Property<string>("ApiKey")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CalledOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Endpoint")
                         .IsRequired()
@@ -83,8 +101,9 @@ namespace api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Timestamp")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -97,39 +116,30 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Models.ApiKey", b =>
                 {
-                    b.Property<int>("ApiKeyId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ApiKeyId"), 1L, 1);
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Key")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("ApiKeyId");
+                    b.HasKey("Key");
 
                     b.ToTable("ApiKeys");
 
                     b.HasData(
                         new
                         {
-                            ApiKeyId = 1,
-                            Active = true,
                             Key = "1",
+                            CreatedOn = new DateTime(2022, 10, 19, 17, 30, 25, 589, DateTimeKind.Local).AddTicks(2604),
                             UserId = 1
                         },
                         new
                         {
-                            ApiKeyId = 2,
-                            Active = true,
-                            Key = "2",
+                            Key = "mCQ6qIqkNy",
+                            CreatedOn = new DateTime(2022, 10, 19, 17, 30, 25, 589, DateTimeKind.Local).AddTicks(2607),
                             UserId = 2
                         });
                 });

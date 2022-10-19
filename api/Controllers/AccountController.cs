@@ -11,7 +11,7 @@ namespace api.Controllers
     public class AccountController : ControllerBase
     {
         private readonly ILogger<AccountController> _logger;
-        private OctopusContext _context;
+        private readonly OctopusContext _context;
 
         public AccountController(ILogger<AccountController> logger)
         {
@@ -19,7 +19,7 @@ namespace api.Controllers
             _context = new OctopusContext();
         }
 
-        // GET: api/<AccountController>
+        // GET: api/Account/get
         [HttpGet]
         public IEnumerable<Account> Get()
         {
@@ -36,17 +36,17 @@ namespace api.Controllers
         }
 
         // GET api/<AccountController>/5
-        [HttpGet("{id}")]
-        public IEnumerable<Account> Get(int id)
+        [HttpGet("{userId}")]
+        public IEnumerable<Account> Get(int userId)
         {
             _logger.LogInformation("GET: api/Account/#");
             try
             {
-                return _context.Accounts.Where(a => a.UserId == id).ToList();
+                return _context.Accounts.Where(a => a.UserId == userId).ToList();
             }
             catch (Exception)
             {
-                throw new Exception($"tried to GET {id} but failed");
+                throw new Exception($"tried to GET {userId} but failed");
             }
             
         }
@@ -58,6 +58,7 @@ namespace api.Controllers
             _logger.LogInformation("POST: api/Account");
             try
             {
+                account.Active = true;
                 _context.Accounts.Add(account);
                 _context.SaveChanges();
                 return "account added to db";
@@ -70,43 +71,54 @@ namespace api.Controllers
         }
 
         // PUT api/<AccountController>/5
-        [HttpPut("{id}")]
-        public string Put(int id, [FromBody] Account account)
+        [HttpPut("{userId}")]
+        public string Put(int userId, [FromBody] Account account)
         {
             _logger.LogInformation("PUT: api/Account/#");
-            Account? a = _context.Accounts.Where(a => a.UserId == id).FirstOrDefault();
+            Account? a = _context.Accounts.Where(a => a.UserId == userId).FirstOrDefault();
             try
             {
                 a.Username = account.Username;
                 a.Email = account.Email;
                 a.Password = account.Password;
-                //a.ApiKey = account.ApiKey;
                 _context.Accounts.Update(a);
                 _context.SaveChanges();
                 return $"userId == {a.UserId} updated in db";
             }
             catch (Exception)
             {
-                throw new Exception ($"tried to UPDATE WHERE UserId == {id}, but id didn't exist");
+                throw new Exception ($"tried to UPDATE WHERE UserId == {userId}, but id didn't exist");
             }
             
         }
 
         // DELETE api/<AccountController>/5
-        [HttpDelete("{id}")]
-        public string Delete(int id)
+        [HttpDelete("{userId}")]
+        public string Delete(int userId)
         {
             _logger.LogInformation("DELETE: api/Account/#");
-            Account? a = _context.Accounts.Where(a => a.UserId == id).FirstOrDefault();
+            Account? a = _context.Accounts.Where(a => a.UserId == userId).FirstOrDefault();
             try
             {
-                _context.Accounts.Remove(a);
+                // update account active to false
+                a.Active = false;
+                _context.Accounts.Update(a);
+                //_context.Accounts.Remove(a);
+                //_context.SaveChanges();
+
+                // deactiving all api keys associated to account
+                List<ApiKey> dact = _context.ApiKeys.Where(a => a.UserId == userId).ToList();
+                foreach (ApiKey d in dact)
+                {
+                    _context.ApiKeys.Remove(d);
+                }
                 _context.SaveChanges();
+
                 return $"userId == {a.UserId} removed from db";
             }
             catch (Exception)
             {
-                throw new Exception($"tried to DELETE WHERE UserId == {id}, but id didn't exist");
+                throw new Exception($"tried to DELETE WHERE UserId == {userId}, but id didn't exist");
             }
             
         }

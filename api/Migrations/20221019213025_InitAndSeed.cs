@@ -17,7 +17,9 @@ namespace api.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,11 +32,11 @@ namespace api.Migrations
                 {
                     ApiCallId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Timestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Endpoint = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApiKey = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Key = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    IpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CalledOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,33 +47,32 @@ namespace api.Migrations
                 name: "ApiKeys",
                 columns: table => new
                 {
-                    ApiKeyId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Key = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Key = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    Active = table.Column<bool>(type: "bit", nullable: false)
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ApiKeys", x => x.ApiKeyId);
+                    table.PrimaryKey("PK_ApiKeys", x => x.Key);
                 });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
-                columns: new[] { "UserId", "Email", "Password", "Username" },
+                columns: new[] { "UserId", "Active", "CreatedOn", "Email", "Password", "Username" },
                 values: new object[,]
                 {
-                    { 1, "admin@email.com", "admin", "admin" },
-                    { 2, "user1@email.com", "user1", "user1" }
+                    { 1, true, new DateTime(2022, 10, 19, 17, 30, 25, 589, DateTimeKind.Local).AddTicks(2467), "admin@email.com", "admin", "admin" },
+                    { 2, true, new DateTime(2022, 10, 19, 17, 30, 25, 589, DateTimeKind.Local).AddTicks(2503), "user1@email.com", "user1", "user1" },
+                    { 3, false, new DateTime(2022, 10, 19, 17, 30, 25, 589, DateTimeKind.Local).AddTicks(2505), "user1@email.com", "user2", "user2" }
                 });
 
             migrationBuilder.InsertData(
                 table: "ApiKeys",
-                columns: new[] { "ApiKeyId", "Active", "Key", "UserId" },
+                columns: new[] { "Key", "CreatedOn", "UserId" },
                 values: new object[,]
                 {
-                    { 1, true, "1", 1 },
-                    { 2, true, "2", 2 }
+                    { "1", new DateTime(2022, 10, 19, 17, 30, 25, 589, DateTimeKind.Local).AddTicks(2604), 1 },
+                    { "mCQ6qIqkNy", new DateTime(2022, 10, 19, 17, 30, 25, 589, DateTimeKind.Local).AddTicks(2607), 2 }
                 });
         }
 

@@ -17,13 +17,14 @@ namespace api.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>().HasData(new Account[] {
-                new Account{UserId=1, Username="admin", Email="admin@email.com", Password="admin"},
-                new Account{UserId=2, Username="user1", Email="user1@email.com", Password="user1"},
+                new Account{UserId=1, Username="admin", Email="admin@email.com", Password="admin", Active=true, CreatedOn=DateTime.Now},
+                new Account{UserId=2, Username="user1", Email="user1@email.com", Password="user1", Active=true, CreatedOn=DateTime.Now},
+                new Account{UserId=3, Username="user2", Email="user1@email.com", Password="user2", Active=false, CreatedOn=DateTime.Now},
             });
 
             modelBuilder.Entity<ApiKey>().HasData(new ApiKey[] {
-                new ApiKey{ApiKeyId=1, Key="1", UserId=1, Active=true},
-                new ApiKey{ApiKeyId=2, Key="2", UserId=2, Active=true},
+                new ApiKey{Key="1", UserId=1, CreatedOn=DateTime.Now},
+                new ApiKey{Key="mCQ6qIqkNy", UserId=2, CreatedOn=DateTime.Now},
             });
         }
     }

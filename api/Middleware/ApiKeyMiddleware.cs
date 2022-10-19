@@ -28,7 +28,7 @@ namespace api.Middleware
             if (!context.Request.Headers.TryGetValue(APIKEYNAME, out var extractedApiKey))
             {
                 context.Response.StatusCode = 401;
-                _context.ApiCalls.Add(new ApiCall { Timestamp = DateTime.Now, Endpoint = context.Request.Method + context.Request.Path, ApiKey = "0", UserId = "0", IpAddress = context.Connection.RemoteIpAddress.ToString() });
+                _context.ApiCalls.Add(new ApiCall { Endpoint = context.Request.Method + context.Request.Path, Key = "0", UserId = "0", IpAddress = context.Connection.RemoteIpAddress.ToString(), CalledOn = DateTime.Now });
                 _context.SaveChanges();
                 _logger.LogInformation("Api Key was not provided");
                 await context.Response.WriteAsync("Api Key was not provided");
@@ -41,14 +41,14 @@ namespace api.Middleware
             if (a == null)
             {
                 context.Response.StatusCode = 401;
-                _context.ApiCalls.Add(new ApiCall { Timestamp = DateTime.Now, Endpoint = context.Request.Method + context.Request.Path, ApiKey = exApiKey, UserId = a.UserId.ToString(), IpAddress = context.Connection.RemoteIpAddress.ToString() });
+                _context.ApiCalls.Add(new ApiCall { Endpoint = context.Request.Method + context.Request.Path, Key = exApiKey, UserId = a.UserId.ToString(), IpAddress = context.Connection.RemoteIpAddress.ToString(), CalledOn = DateTime.Now });
                 _context.SaveChanges();
                 _logger.LogInformation("Unauthorized client");
                 await context.Response.WriteAsync("Unauthorized client");
                 return;
             }
 
-            _context.ApiCalls.Add(new ApiCall { Timestamp = DateTime.Now, Endpoint = context.Request.Method + context.Request.Path, ApiKey = exApiKey, UserId = a.UserId.ToString(), IpAddress = context.Connection.RemoteIpAddress.ToString() });
+            _context.ApiCalls.Add(new ApiCall { Endpoint = context.Request.Method + context.Request.Path, Key = exApiKey, UserId = a.UserId.ToString(), IpAddress = context.Connection.RemoteIpAddress.ToString(), CalledOn = DateTime.Now });
             _context.SaveChanges();
             await _next(context);
         }

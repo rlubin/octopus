@@ -6,13 +6,14 @@ namespace api.Models
     public class ApiKey
     {
         [Key]
-        public int ApiKeyId { get; set; }
         [Required]
-        public string? Key { get; set; }
-        [Required]
+        public string Key { get; set; }
+
         [ForeignKey("UserId")]
-        public int UserId { get; set; }
         [Required]
-        public bool Active { get; set; }
+        public int UserId { get; set; }
+
+        [Required]
+        public DateTime CreatedOn { get; set; }
     }
 }

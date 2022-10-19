@@ -7,17 +7,22 @@ namespace api.Models
     {
         [Key]
         public int ApiCallId { get; set; }
-        [Required]
-        public DateTime Timestamp { get; set; }
+
         [Required]
         public string? Endpoint { get; set; }
+
         [Required]
         [ForeignKey("Key")]
-        public string? ApiKey { get; set; }
+        public string? Key { get; set; }
+
         [Required]
         [ForeignKey("UserId")]
         public string? UserId { get; set; }
+
         [Required]
         public string? IpAddress { get; set; }
+
+        [Required]
+        public DateTime CalledOn { get; set; }
     }
 }

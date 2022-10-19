@@ -6,6 +6,7 @@ namespace api.Models
     public class Account
     {
         [Key]
+        [Required]
         public int UserId { get; set; }
 
         [Required]
@@ -16,5 +17,11 @@ namespace api.Models
 
         [Required]
         public string? Password { get; set; }
+
+        [Required]
+        public bool Active { get; set; }
+
+        [Required]
+        public DateTime CreatedOn { get; set; }
     }
 }
