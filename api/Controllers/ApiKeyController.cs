@@ -76,7 +76,7 @@ namespace api.Controllers
                 
                 // set up new key, attach userId and activate
                 var randomGenerator = new Random();
-                ApiKey new_ak = new ApiKey { UserId = userId, Key = randomGenerator.Next(1, 500000).ToString() };
+                ApiKey new_ak = new ApiKey { UserId = userId, Key = randomGenerator.Next(1, 500000).ToString(), CreatedOn = DateTime.Now };
                 _context.ApiKeys.Add(new_ak);
                 _context.SaveChanges();
                 return new List<ApiKey>() { new_ak };

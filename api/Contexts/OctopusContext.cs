@@ -1,5 +1,6 @@
 ﻿using api.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace api.Contexts
 {
@@ -11,7 +12,10 @@ namespace api.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-HSHM0PP;Initial Catalog=octopus;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: false);
+            IConfiguration configuration =  builder.Build();
+            string conString = configuration.GetValue<string>("ConnectionStrings:Local");
+            optionsBuilder.UseSqlServer(conString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,8 +1,11 @@
 create different middleware for valid session check
 session cookie login/logout
+setup only account/apikey endpoints
+create new middleware
 
 create different middleware for api token in url
 add apikey to url host:123/api=asldkasld for data processing endpoints
+setup only for endpoints that will return data only and are not account management related
 
 find a way to automate return messages from api endpoints
 
